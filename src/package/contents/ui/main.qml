@@ -12,15 +12,24 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 Item {
     Plasmoid.fullRepresentation: ColumnLayout {
         anchors.fill: parent
-        Image {
+
+        MouseArea {
+            id: imageArea
             Layout.fillHeight: true
             Layout.fillWidth: true
-            fillMode: Image.PreserveAspectFit
-            source: "../images/pairs.svg"
+            onClicked: Plasmoid.nativeInterface.nextImage()
+
+            Image {
+                id: image
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+                source: Plasmoid.nativeInterface.currentImage
+            }
         }
+
         PlasmaComponents3.Label {
             Layout.alignment: Qt.AlignCenter
-            text: Plasmoid.nativeInterface.nativeText
+            text: Plasmoid.nativeInterface.currentImageName
         }
     }
 }
